@@ -1,0 +1,43 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 140px;
+  padding: 22px;
+
+  border: 1px solid #e7e9f2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 16px rgba(31, 39, 72, 0.05);
+}
+
+.boardTitle {
+  margin: 0;
+  font-size: 19px;
+  text-decoration: none;
+  color: var(--color-text-primary);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.deleteButton {
+  align-self: flex-start;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: var(--color-cancel);
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.deleteIcon {
+  margin-right: 6px;
+}

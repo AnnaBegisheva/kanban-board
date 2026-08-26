@@ -1,0 +1,17 @@
+.homeBoards {
+  display: flex;
+  flex-direction: column;
+}
+
+.addBtnWrapper {
+  position: fixed;
+  top: 5rem;
+  z-index: 100;
+  align-self: flex-end;
+}
+
+.boards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 18px;
+}

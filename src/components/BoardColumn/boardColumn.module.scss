@@ -1,0 +1,48 @@
+.column {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 240px;
+
+  background: #f1f3f7;
+  border-radius: 10px 10px 0 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 16px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #526176;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.count {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.done {
+  color: #22a06b;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 0 8px 8px;
+
+  overflow-y: auto;
+}

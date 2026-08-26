@@ -1,0 +1,29 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+:root {
+  --color-text-primary: #42526b;
+  --color-text-secondary: #64748b;
+
+  --color-background: #f7f8fc;
+  --color-primary: #6875e8;
+  --color-cancel: #a05a68;
+
+  --color-tag-green: #3d806b;
+  --color-tag-blue: #2d66b1;
+  --color-tag-purple: #6655a6;
+  --color-tag-yellow: #d9a400;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6;
+}

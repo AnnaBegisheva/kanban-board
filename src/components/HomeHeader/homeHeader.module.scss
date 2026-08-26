@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.label {
+  margin: 0 0 8px;
+  color: var(--color-primary);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  color: var(--color-text-secondary);
+}
