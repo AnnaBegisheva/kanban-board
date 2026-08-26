@@ -1,7 +1,8 @@
-import { routes } from '@components/AppRouter/RoutesConfig';
-import styles from './app.module.scss';
 import AppRouter from '@components/AppRouter/AppRouter';
+import { routes } from '@components/AppRouter/RoutesConfig';
 import { BrowserRouter } from 'react-router';
+
+import styles from './app.module.scss';
 
 function App() {
   return (

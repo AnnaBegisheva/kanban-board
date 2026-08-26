@@ -1,8 +1,8 @@
-import { Avatar } from 'antd';
 import { BookOutlined } from '@ant-design/icons';
+import { Avatar } from 'antd';
 
-import styles from './taskCardPreview.module.scss';
 import type { Task } from '../../assets/data';
+import styles from './taskCardPreview.module.scss';
 
 const TaskCardPreview = ({ task }: { task: Task }) => {
   return (

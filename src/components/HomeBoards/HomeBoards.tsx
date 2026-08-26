@@ -1,10 +1,10 @@
-import EmptyBoards from '@components/EmptyBoards/EmptyBoards';
-import styles from './homeBoards.module.scss';
+import AddNewBoard from '@components/AddNewBoard/AddNewBoard';
 import BoardPreview from '@components/BoardPreview/BoardPreview';
+import EmptyBoards from '@components/EmptyBoards/EmptyBoards';
 import { useState } from 'react';
 
-import { starterBoards, type Board } from '../../assets/data';
-import AddNewBoard from '@components/AddNewBoard/AddNewBoard';
+import { type Board,starterBoards } from '../../assets/data';
+import styles from './homeBoards.module.scss';
 
 const HomeBoards = () => {
   const [boards, setBoards] = useState<Board[]>(starterBoards);

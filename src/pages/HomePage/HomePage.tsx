@@ -1,7 +1,7 @@
-import styles from './HomePage.module.scss';
-
-import HomeHeader from '@components/HomeHeader/HomeHeader';
 import HomeBoards from '@components/HomeBoards/HomeBoards';
+import HomeHeader from '@components/HomeHeader/HomeHeader';
+
+import styles from './HomePage.module.scss';
 
 const HomePage = () => {
   return (

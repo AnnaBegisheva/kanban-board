@@ -1,11 +1,10 @@
 import ModalWindow from '@components/ModalWindow/ModalWindow';
-
-import { useModal } from '@hooks/useModal';
-import styles from './addNewTask.module.scss';
-import type { Task, TaskValues } from '../../assets/data';
-
 import NewTaskForm from '@components/NewTaskForm/NewTaskForm';
+import { useModal } from '@hooks/useModal';
 import { Button } from 'antd';
+
+import type { Task, TaskValues } from '../../assets/data';
+import styles from './addNewTask.module.scss';
 
 const AddNewTask = () => {
   const [isOpen, open, close] = useModal();

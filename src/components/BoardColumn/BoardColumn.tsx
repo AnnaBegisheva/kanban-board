@@ -1,7 +1,6 @@
-import TaskCard from '../TaskCardPreview/TaskCardPreview';
-
-import styles from './BoardColumn.module.scss';
 import type { Task } from '../../assets/data';
+import TaskCard from '../TaskCardPreview/TaskCardPreview';
+import styles from './BoardColumn.module.scss';
 
 const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
   return (

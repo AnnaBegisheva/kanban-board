@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router';
 
 // import ProtectedRoute from '@components/ProtectedRoute/ProtectedRoute';
-
 import { type RouteConfig } from './RoutesConfig';
 
 const AppRouter = ({ routes }: { routes: RouteConfig[] }) => {

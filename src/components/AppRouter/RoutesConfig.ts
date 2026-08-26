@@ -1,5 +1,5 @@
-import HomePage from '@pages/HomePage/HomePage';
 import BoardPage from '@pages/BoardPage/BoardPage';
+import HomePage from '@pages/HomePage/HomePage';
 // import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
 
 export interface RouteConfig {

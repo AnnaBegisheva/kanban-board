@@ -1,9 +1,9 @@
 import Board from '@components/Board/Board';
 import BoardHeader from '@components/BoardHeader/BoardHeader';
 import BoardToolbar from '@components/BoardToolbar/BoardToolbar';
+import { useParams } from 'react-router';
 
 import styles from './boardPage.module.scss';
-import { useParams } from 'react-router';
 
 const BoardPage = () => {
   const { id } = useParams<{ id: string }>();

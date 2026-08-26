@@ -1,7 +1,6 @@
-import BoardColumn from '../BoardColumn/BoardColumn';
-
-import styles from './Board.module.scss';
 import { starterBoards } from '../../assets/data';
+import BoardColumn from '../BoardColumn/BoardColumn';
+import styles from './Board.module.scss';
 
 const Board = ({ boardId }: { boardId: number }) => {
   const board = starterBoards.find((b) => b.id === boardId) || starterBoards[0];

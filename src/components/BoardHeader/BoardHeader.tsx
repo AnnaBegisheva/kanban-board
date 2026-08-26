@@ -1,10 +1,10 @@
 import { EllipsisOutlined, StarOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
-
-import styles from './boardHeader.module.scss';
-import { Link } from 'react-router';
-import { starterBoards } from '../../assets/data';
 import AddNewTask from '@components/AddNewTask/AddNewTask';
+import { Button } from 'antd';
+import { Link } from 'react-router';
+
+import { starterBoards } from '../../assets/data';
+import styles from './boardHeader.module.scss';
 
 const BoardHeader = ({ boardId }: { boardId: number }) => {
   const boardName = starterBoards.find((board) => board.id === boardId)?.name || 'Unnamed Board';
