@@ -3,11 +3,12 @@ import AddNewTask from '@components/AddNewTask/AddNewTask';
 import { Button } from 'antd';
 import { Link } from 'react-router';
 
-import { starterBoards } from '../../assets/data';
 import styles from './boardHeader.module.scss';
+import useBoardsStore from '@store/Boards/useBoardsStore';
 
 const BoardHeader = ({ boardId }: { boardId: number }) => {
-  const boardName = starterBoards.find((board) => board.id === boardId)?.name || 'Unnamed Board';
+  const boardName =
+    useBoardsStore((state) => state.boards.find((board) => board.id === boardId)?.name) || 'Unnamed Board';
   return (
     <>
       <div className={styles.breadcrumbs}>

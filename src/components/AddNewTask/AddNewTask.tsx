@@ -3,7 +3,7 @@ import NewTaskForm from '@components/NewTaskForm/NewTaskForm';
 import { useModal } from '@hooks/useModal';
 import { Button } from 'antd';
 
-import type { Task, TaskValues } from '../../assets/data';
+import type { Task, TaskValues } from '@store/Boards/types';
 import styles from './addNewTask.module.scss';
 
 const AddNewTask = () => {

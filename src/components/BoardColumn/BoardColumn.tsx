@@ -1,4 +1,4 @@
-import type { Task } from '../../assets/data';
+import type { Task } from '@store/Boards/types';
 import TaskCard from '../TaskCardPreview/TaskCardPreview';
 import styles from './BoardColumn.module.scss';
 

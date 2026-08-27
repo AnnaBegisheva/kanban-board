@@ -1,16 +1,16 @@
 import AddNewBoard from '@components/AddNewBoard/AddNewBoard';
 import BoardPreview from '@components/BoardPreview/BoardPreview';
 import EmptyBoards from '@components/EmptyBoards/EmptyBoards';
-import { useState } from 'react';
 
-import { type Board,starterBoards } from '../../assets/data';
 import styles from './homeBoards.module.scss';
+import useBoardsStore from '@store/Boards/useBoardsStore';
 
 const HomeBoards = () => {
-  const [boards, setBoards] = useState<Board[]>(starterBoards);
+  const boards = useBoardsStore((state) => state.boards);
+  const { actions } = useBoardsStore();
 
-  const deleteBoard = (id: string | number) => {
-    setBoards((current) => current.filter((board) => board.id !== id));
+  const deleteBoard = (id: number) => {
+    actions.deleteBoard(id);
   };
 
   if (!boards.length) {
@@ -22,7 +22,7 @@ const HomeBoards = () => {
   return (
     <div className={styles.homeBoards}>
       <div className={styles.addBtnWrapper}>
-        <AddNewBoard setBoards={setBoards} />
+        <AddNewBoard />
       </div>
 
       <section className={styles.boards}>

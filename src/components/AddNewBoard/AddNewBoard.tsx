@@ -1,13 +1,14 @@
 import ModalWindow from '@components/ModalWindow/ModalWindow';
 import NewBoardForm from '@components/NewBoardForm/NewBoardForm';
 import { useModal } from '@hooks/useModal';
-import type { Dispatch, SetStateAction } from 'react';
 
-import type { Board } from '../../assets/data';
+import type { Board } from '@store/Boards/types';
 import styles from './addNewBoard.module.scss';
+import useBoardsStore from '@store/Boards/useBoardsStore';
 
-const AddNewBoard = ({ setBoards }: { setBoards: Dispatch<SetStateAction<Board[]>> }) => {
+const AddNewBoard = () => {
   const [isOpen, open, close] = useModal();
+  const { actions } = useBoardsStore();
 
   const handleCreateBoard = (title: string) => {
     const newBoard: Board = {
@@ -16,7 +17,7 @@ const AddNewBoard = ({ setBoards }: { setBoards: Dispatch<SetStateAction<Board[]
       columns: [],
       tasks: [],
     };
-    setBoards((current) => [...current, newBoard]);
+    actions.addBoard(newBoard);
     close();
   };
 

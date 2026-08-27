@@ -1,28 +1,7 @@
-export type Column = {
-  id: 'todo' | 'progress' | 'review' | 'done';
-  title: string;
-};
+import { create } from 'zustand';
+import type { Board } from './types';
 
-export type Board = {
-  id: number;
-  name: string;
-  columns: Column[];
-  tasks: Task[];
-};
-
-export type Task = {
-  id: string;
-  title: string;
-  assignee: string;
-  description: string;
-  status: Column['id'];
-  date: string;
-  category?: 'billing' | 'accounts' | 'forms' | 'other';
-};
-
-export type TaskValues = Omit<Task, 'id' | 'status' | 'date'>;
-
-export const starterBoards: Board[] = [
+const starterBoards: Board[] = [
   {
     id: 1,
     name: 'Product roadmap',
@@ -175,3 +154,29 @@ export const starterBoards: Board[] = [
     tasks: [],
   },
 ];
+
+type BoardsStore = {
+  boards: Board[];
+  actions: {
+    addBoard: (board: Board) => void;
+    deleteBoard: (boardId: number) => void;
+    updateBoard: (updatedBoard: Board) => void;
+  };
+};
+
+const useBoardsStore = create<BoardsStore>((set) => ({
+  boards: starterBoards,
+  actions: {
+    addBoard: (board) => set((state) => ({ boards: [...state.boards, board] })),
+    deleteBoard: (boardId) =>
+      set((state) => ({
+        boards: state.boards.filter((board) => board.id !== boardId),
+      })),
+    updateBoard: (updatedBoard) =>
+      set((state) => ({
+        boards: state.boards.map((board) => (board.id === updatedBoard.id ? updatedBoard : board)),
+      })),
+  },
+}));
+
+export default useBoardsStore;
