@@ -20,7 +20,7 @@ const BoardHeader = ({ boardId }: { boardId: number }) => {
       </div>
 
       <header className={styles.header}>
-        <AddNewTask />
+        <AddNewTask boardId={boardId} />
 
         <div className={styles.actions}>
           <Button type="text" icon={<StarOutlined />} />

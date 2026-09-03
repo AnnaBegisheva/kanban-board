@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Board } from './types';
+import type { Board, Task } from './types';
 
 const starterBoards: Board[] = [
   {
@@ -161,6 +161,7 @@ type BoardsStore = {
     addBoard: (board: Board) => void;
     deleteBoard: (boardId: number) => void;
     updateBoard: (updatedBoard: Board) => void;
+    addTask: (boardId: number, task: Task) => void;
   };
 };
 
@@ -175,6 +176,13 @@ const useBoardsStore = create<BoardsStore>((set) => ({
     updateBoard: (updatedBoard) =>
       set((state) => ({
         boards: state.boards.map((board) => (board.id === updatedBoard.id ? updatedBoard : board)),
+      })),
+
+    addTask: (boardId: number, task: Task) =>
+      set((state) => ({
+        boards: state.boards.map((board) =>
+          board.id === boardId ? { ...board, tasks: [...board.tasks, task] } : board,
+        ),
       })),
   },
 }));

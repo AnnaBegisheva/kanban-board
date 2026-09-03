@@ -9,9 +9,9 @@ const TaskCardPreview = ({ task }: { task: Task }) => {
     <article className={styles.card}>
       <h3 className={styles.title}>{task.title}</h3>
 
-      <span className={`${styles.category} ${task.category ? styles[task.category] : ''}`}>
-        {task.category?.toUpperCase()}
-      </span>
+      {task.category && (
+        <span className={`${styles.category} ${styles[task.category]}`}>{task.category.toUpperCase()}</span>
+      )}
 
       <footer className={styles.footer}>
         <div className={styles.id}>
@@ -21,7 +21,7 @@ const TaskCardPreview = ({ task }: { task: Task }) => {
 
           {task.id}
         </div>
-
+        {/* REVIEW: assignee is a string, not url -> add url */}
         {task.assignee && <Avatar size={28} src={task.assignee} />}
       </footer>
     </article>

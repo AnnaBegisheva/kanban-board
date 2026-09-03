@@ -7,11 +7,7 @@ import useBoardsStore from '@store/Boards/useBoardsStore';
 
 const HomeBoards = () => {
   const boards = useBoardsStore((state) => state.boards);
-  const { actions } = useBoardsStore();
-
-  const deleteBoard = (id: number) => {
-    actions.deleteBoard(id);
-  };
+  const deleteBoard = useBoardsStore((state) => state.actions.deleteBoard);
 
   if (!boards.length) {
     return <EmptyBoards />;

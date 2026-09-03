@@ -1,0 +1,20 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: #6875e8;
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    color: #fff;
+    opacity: 0.85;
+  }
+}
