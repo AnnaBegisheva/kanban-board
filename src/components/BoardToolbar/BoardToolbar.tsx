@@ -3,6 +3,9 @@ import { Avatar, Button, Input } from 'antd';
 
 import styles from './boardToolbar.module.scss';
 
+// REVIEW: Когда поиск/фильтры будут реализованы, их состояние должно
+// жить не здесь, а в BoardPage или store, чтобы Board мог его читать
+
 const BoardToolbar = () => {
   return (
     <div className={styles.toolbar}>

@@ -8,16 +8,16 @@ import useBoardsStore from '@store/Boards/useBoardsStore';
 
 const AddNewBoard = () => {
   const [isOpen, open, close] = useModal();
-  const { actions } = useBoardsStore();
+  const addBoard = useBoardsStore((state) => state.actions.addBoard);
 
   const handleCreateBoard = (title: string) => {
     const newBoard: Board = {
       id: new Date().getTime(),
-      name: title,
+      name: title[0].toUpperCase() + title.slice(1),
       columns: [],
       tasks: [],
     };
-    actions.addBoard(newBoard);
+    addBoard(newBoard);
     close();
   };
 

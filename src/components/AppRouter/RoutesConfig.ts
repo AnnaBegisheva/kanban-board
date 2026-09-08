@@ -1,6 +1,6 @@
 import BoardPage from '@pages/BoardPage/BoardPage';
 import HomePage from '@pages/HomePage/HomePage';
-// import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
+import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
 
 export interface RouteConfig {
   path: string;
@@ -20,9 +20,9 @@ export const routes: RouteConfig[] = [
     component: BoardPage,
     title: 'Доска',
   },
-  //   {
-  //     path: '*',
-  //     component: NotFoundPage,
-  //     title: 'Страница не найдена',
-  //   },
+  {
+    path: '*',
+    component: NotFoundPage,
+    title: 'Страница не найдена',
+  },
 ];

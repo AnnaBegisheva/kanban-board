@@ -17,6 +17,8 @@ export type Task = {
   description: string;
   status: Column['id'];
   date: string;
+  // REVIEW: категории прописать константой и выводить через typeof
+  // TODO: будут ли категории меняться / задаваться при создании доски? если да, то как лучше их обрабатывать и стилизовать?
   category?: 'billing' | 'accounts' | 'forms' | 'other';
 };
 
