@@ -7,7 +7,7 @@ import type { Task, TaskValues } from '@store/Boards/types';
 import styles from './addNewTask.module.scss';
 import useBoardsStore from '@store/Boards/useBoardsStore';
 
-const AddNewTask = ({ boardId }: { boardId: number }) => {
+const AddNewTask = ({ boardId }: { boardId: string }) => {
   const [isOpen, open, close] = useModal();
   const addTask = useBoardsStore((state) => state.actions.addTask);
 

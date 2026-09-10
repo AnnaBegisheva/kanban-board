@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import styles from './boardHeader.module.scss';
 import useBoardsStore from '@store/Boards/useBoardsStore';
 
-const BoardHeader = ({ boardId }: { boardId: number }) => {
+const BoardHeader = ({ boardId }: { boardId: string }) => {
   const boardName =
     useBoardsStore((state) => state.boards.find((board) => board.id === boardId)?.name) || 'Unnamed Board';
   return (
@@ -21,7 +21,6 @@ const BoardHeader = ({ boardId }: { boardId: number }) => {
 
       <header className={styles.header}>
         <AddNewTask boardId={boardId} />
-
         <div className={styles.actions}>
           <Button type="text" icon={<StarOutlined />} />
           <Button type="text" icon={<EllipsisOutlined />} />

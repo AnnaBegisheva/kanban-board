@@ -4,16 +4,27 @@ import BoardToolbar from '@components/BoardToolbar/BoardToolbar';
 import { useParams } from 'react-router';
 
 import styles from './boardPage.module.scss';
+import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
+import { useEffect } from 'react';
+import useBoardsStore from '@store/Boards/useBoardsStore';
 
 const BoardPage = () => {
   const { id } = useParams<{ id: string }>();
-  const boardId = id ? parseInt(id, 10) : 1;
+  const loadBoards = useBoardsStore((state) => state.actions.loadBoards);
+
+  useEffect(() => {
+    loadBoards();
+  }, [loadBoards]);
+
+  if (!id) {
+    return <NotFoundPage />;
+  }
 
   return (
     <main className={styles.boardPage}>
-      <BoardHeader boardId={boardId} />
+      <BoardHeader boardId={id} />
       <BoardToolbar />
-      <Board boardId={boardId} />
+      <Board boardId={id} />
     </main>
   );
 };
