@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { Link } from 'react-router';
 
 import styles from './boardHeader.module.scss';
-import useBoardsStore from '@store/Boards/useBoardsStore';
+import useBoardsStore from '../../stores/Boards/useBoardsStore';
 
 const BoardHeader = ({ boardId }: { boardId: string }) => {
   const boardName =

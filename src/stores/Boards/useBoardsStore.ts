@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { Board, Task } from './types';
-import { getBoards, getCardsByBoardId, getListsByBoardId } from './api';
+import { getBoardById, getBoards, getCardsByBoardId, getListsByBoardId } from './api';
 
 type BoardsStore = {
   boards: Board[];
@@ -8,6 +8,7 @@ type BoardsStore = {
   error: string | null;
   actions: {
     loadBoards: () => Promise<void>;
+    loadBoardById: (boardId: string) => Promise<void>;
     addBoard: (board: Board) => void;
     deleteBoard: (boardId: string) => void;
     updateBoard: (updatedBoard: Board) => void;
@@ -36,6 +37,30 @@ const useBoardsStore = create<BoardsStore>((set) => ({
         set({
           isLoading: false,
           error: 'Failed to load boards',
+        });
+      }
+    },
+    loadBoardById: async (boardId: string) => {
+      set({ isLoading: true, error: null });
+
+      try {
+        const board = await getBoardById(boardId);
+
+        if (board) {
+          set((state) => ({
+            boards: [...state.boards.filter((b) => b.id !== boardId), board],
+            isLoading: false,
+          }));
+        } else {
+          set({
+            isLoading: false,
+            error: 'Board not found',
+          });
+        }
+      } catch {
+        set({
+          isLoading: false,
+          error: 'Failed to load board',
         });
       }
     },

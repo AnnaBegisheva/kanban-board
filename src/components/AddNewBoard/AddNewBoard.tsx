@@ -2,9 +2,9 @@ import ModalWindow from '@components/ModalWindow/ModalWindow';
 import NewBoardForm from '@components/NewBoardForm/NewBoardForm';
 import { useModal } from '@hooks/useModal';
 
-import type { Board } from '@store/Boards/types';
+import type { Board } from '../../stores/Boards/types';
 import styles from './addNewBoard.module.scss';
-import useBoardsStore from '@store/Boards/useBoardsStore';
+import useBoardsStore from '../../stores/Boards/useBoardsStore';
 
 const AddNewBoard = () => {
   const [isOpen, open, close] = useModal();
@@ -12,7 +12,7 @@ const AddNewBoard = () => {
 
   const handleCreateBoard = (title: string) => {
     const newBoard: Board = {
-      id: new Date().getTime(),
+      id: new Date().getTime().toString(),
       name: title[0].toUpperCase() + title.slice(1),
       columns: [],
       tasks: [],

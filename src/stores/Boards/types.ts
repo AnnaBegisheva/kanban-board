@@ -23,4 +23,4 @@ export type Task = {
   category?: 'billing' | 'accounts' | 'forms' | 'other'; // label
 };
 
-export type TaskValues = Omit<Task, 'id' | 'status' | 'date'>;
+export type TaskValues = Omit<Task, 'id' | 'idList' | 'date'>;

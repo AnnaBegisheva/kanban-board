@@ -1,7 +1,7 @@
 import { BookOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 
-import type { Task } from '@store/Boards/types';
+import type { Task } from '../../stores/Boards/types';
 import styles from './taskCardPreview.module.scss';
 
 const TaskCardPreview = ({ task }: { task: Task }) => {

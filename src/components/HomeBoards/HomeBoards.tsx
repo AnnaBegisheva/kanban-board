@@ -2,7 +2,7 @@ import BoardPreview from '@components/BoardPreview/BoardPreview';
 import EmptyBoards from '@components/EmptyBoards/EmptyBoards';
 
 import styles from './homeBoards.module.scss';
-import useBoardsStore from '@store/Boards/useBoardsStore';
+import useBoardsStore from '../../stores/Boards/useBoardsStore';
 import { useEffect } from 'react';
 
 const HomeBoards = () => {

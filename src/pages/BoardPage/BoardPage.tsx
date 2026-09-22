@@ -6,19 +6,19 @@ import { useParams } from 'react-router';
 import styles from './boardPage.module.scss';
 import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
 import { useEffect } from 'react';
-import useBoardsStore from '@store/Boards/useBoardsStore';
+import useBoardsStore from '../../stores/Boards/useBoardsStore';
 
 const BoardPage = () => {
   const { id } = useParams<{ id: string }>();
-  const loadBoards = useBoardsStore((state) => state.actions.loadBoards);
-
-  useEffect(() => {
-    loadBoards();
-  }, [loadBoards]);
+  const loadBoard = useBoardsStore((state) => state.actions.loadBoardById);
 
   if (!id) {
     return <NotFoundPage />;
   }
+
+  useEffect(() => {
+    loadBoard(id);
+  }, [loadBoard]);
 
   return (
     <main className={styles.boardPage}>

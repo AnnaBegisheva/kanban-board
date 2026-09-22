@@ -1,10 +1,14 @@
-import useBoardsStore from '@store/Boards/useBoardsStore';
+import useBoardsStore from '../../stores/Boards/useBoardsStore';
 import BoardColumn from '../BoardColumn/BoardColumn';
 import styles from './Board.module.scss';
 import { useEffect, useMemo } from 'react';
-import type { Column, Task } from '@store/Boards/types';
+import type { Column, Task } from '../../stores/Boards/types';
 
-const Board = ({ boardId }: { boardId: string }) => {
+type BoardProps = {
+  boardId: string;
+};
+
+const Board: React.FC<BoardProps> = ({ boardId }) => {
   const board = useBoardsStore((state) => state.boards.find((b) => b.id === boardId));
   const loadBoardData = useBoardsStore((state) => state.actions.loadBoardData);
 
@@ -16,21 +20,18 @@ const Board = ({ boardId }: { boardId: string }) => {
 
   const columns = board?.columns || [];
 
-  const tasksByColumn = useMemo(() => {
-    const result = new Map<Column['id'], Task[]>();
+  const tasksByColumn = useMemo(
+    () =>
+      (board?.tasks ?? []).reduce<Map<Column['id'], Task[]>>((result, task) => {
+        const tasks = result.get(task.idList) ?? [];
 
-    for (const task of board?.tasks ?? []) {
-      const tasksOfColumn = result.get(task.idList);
+        tasks.push(task);
+        result.set(task.idList, tasks);
 
-      if (tasksOfColumn) {
-        tasksOfColumn.push(task);
-      } else {
-        result.set(task.idList, [task]);
-      }
-    }
-
-    return result;
-  }, [board?.tasks]);
+        return result;
+      }, new Map()),
+    [board?.tasks],
+  );
 
   return (
     <section className={styles.board}>
