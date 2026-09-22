@@ -3,35 +3,44 @@ import NewTaskForm from '@components/NewTaskForm/NewTaskForm';
 import { useModal } from '@hooks/useModal';
 import { Button } from 'antd';
 
-import type { Task, TaskValues } from '../../stores/Boards/types';
+import type { Task, TaskValues } from '../../stores/boards/types';
 import styles from './addNewTask.module.scss';
-import useBoardsStore from '../../stores/Boards/useBoardsStore';
+import { createTask } from '@stores/boards/api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type AddNewTaskProps = {
-  boardId: string;
+  columnId: string;
 };
 
-const AddNewTask: React.FC<AddNewTaskProps> = ({ boardId }) => {
+const AddNewTask: React.FC<AddNewTaskProps> = ({ columnId }) => {
   const [isOpen, open, close] = useModal();
-  const addTask = useBoardsStore((state) => state.actions.addTask);
+  const queryClient = useQueryClient();
+
+  const { mutate: addTask } = useMutation({
+    mutationFn: ({ columnId, newTask }: { columnId: string; newTask: Task }) => createTask(columnId, newTask),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+    onError: (error) => {
+      console.error('Error creating task:', error);
+    },
+  });
 
   const handleCreateTask = (values: TaskValues) => {
     const newTask: Task = {
       ...values,
       name: values.name[0].toUpperCase() + values.name.slice(1),
-      id: new Date().getTime().toString(),
-      // TODO: Implement logic to assign the correct idList based on the selected column in the form
-      idList: '',
-      date: new Date().toISOString(),
+      idList: columnId,
+      id: '',
     };
-    addTask(boardId, newTask);
+    addTask({ columnId, newTask });
     close();
   };
 
   return (
     <>
       <Button type="text" className={styles.primaryButton} onClick={open}>
-        + Add new task
+        +
       </Button>
 
       <ModalWindow open={isOpen} onClose={close}>

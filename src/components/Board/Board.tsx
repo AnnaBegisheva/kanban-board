@@ -1,42 +1,51 @@
-import useBoardsStore from '../../stores/Boards/useBoardsStore';
 import BoardColumn from '../BoardColumn/BoardColumn';
 import styles from './Board.module.scss';
-import { useEffect, useMemo } from 'react';
-import type { Column, Task } from '../../stores/Boards/types';
+import { useMemo } from 'react';
+import type { Column, Task } from '@stores/boards/types';
+import { useQuery } from '@tanstack/react-query';
+import { getCardsByBoardId, getListsByBoardId } from '@stores/boards/api';
 
 type BoardProps = {
   boardId: string;
 };
 
-const Board: React.FC<BoardProps> = ({ boardId }) => {
-  const board = useBoardsStore((state) => state.boards.find((b) => b.id === boardId));
-  const loadBoardData = useBoardsStore((state) => state.actions.loadBoardData);
+const buildColumns = (columns: Column[], tasks: Task[]): Column[] => {
+  const columnsMap = new Map<string, Column>();
 
-  useEffect(() => {
-    if (boardId) {
-      loadBoardData(boardId);
+  columns.forEach((column) => {
+    columnsMap.set(column.id, { ...column, tasks: [] });
+  });
+
+  tasks.forEach((task) => {
+    const column = columnsMap.get(task.idList);
+    if (column) {
+      column.tasks?.push(task);
     }
-  }, [boardId, loadBoardData]);
+  });
 
-  const columns = board?.columns || [];
+  return [...columnsMap.values()];
+};
 
-  const tasksByColumn = useMemo(
-    () =>
-      (board?.tasks ?? []).reduce<Map<Column['id'], Task[]>>((result, task) => {
-        const tasks = result.get(task.idList) ?? [];
+const Board: React.FC<BoardProps> = ({ boardId }) => {
+  const { data: columns } = useQuery({
+    queryKey: ['columns', boardId],
+    queryFn: () => getListsByBoardId(boardId),
+  });
 
-        tasks.push(task);
-        result.set(task.idList, tasks);
+  const { data: tasks } = useQuery({
+    queryKey: ['tasks', boardId],
+    queryFn: () => getCardsByBoardId(boardId),
+  });
 
-        return result;
-      }, new Map()),
-    [board?.tasks],
-  );
+  const tasksByColumn = useMemo(() => {
+    if (!columns || !tasks) return [];
+    return buildColumns(columns, tasks);
+  }, [columns, tasks]);
 
   return (
     <section className={styles.board}>
-      {columns.map((column) => (
-        <BoardColumn key={column.id} tasks={tasksByColumn.get(column.id) ?? []} title={column.name} />
+      {tasksByColumn.map((column) => (
+        <BoardColumn key={column.id} columnId={column.id} tasks={column.tasks ?? []} title={column.name} />
       ))}
     </section>
   );

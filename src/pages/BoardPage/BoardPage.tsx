@@ -5,26 +5,25 @@ import { useParams } from 'react-router';
 
 import styles from './boardPage.module.scss';
 import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
-import { useEffect } from 'react';
-import useBoardsStore from '../../stores/Boards/useBoardsStore';
+import { getBoardById } from '@stores/boards/api';
+import { useQuery } from '@tanstack/react-query';
 
 const BoardPage = () => {
   const { id } = useParams<{ id: string }>();
-  const loadBoard = useBoardsStore((state) => state.actions.loadBoardById);
+  const { data: board } = useQuery({
+    queryKey: ['currentBoard', id],
+    queryFn: () => getBoardById(id!),
+  });
 
-  if (!id) {
+  if (!id || !board) {
     return <NotFoundPage />;
   }
 
-  useEffect(() => {
-    loadBoard(id);
-  }, [loadBoard]);
-
   return (
     <main className={styles.boardPage}>
-      <BoardHeader boardId={id} />
+      <BoardHeader boardName={board.name} />
       <BoardToolbar />
-      <Board boardId={id} />
+      <Board boardId={board.id} />
     </main>
   );
 };

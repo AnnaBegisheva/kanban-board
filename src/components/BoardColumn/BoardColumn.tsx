@@ -1,16 +1,23 @@
-import type { Task } from '../../stores/Boards/types';
+import AddNewTask from '@components/AddNewTask/AddNewTask';
+import type { Task } from '../../stores/boards/types';
 import TaskCard from '../TaskCardPreview/TaskCardPreview';
 import styles from './BoardColumn.module.scss';
 
-const BoardColumn = ({ tasks, title }: { tasks: Task[]; title: string }) => {
+type BoardColumnProps = {
+  tasks: Task[];
+  title: string;
+  columnId: string;
+};
+
+const BoardColumn: React.FC<BoardColumnProps> = ({ tasks, title, columnId }) => {
   return (
     <ul className={styles.column}>
       <header className={styles.header}>
         <div className={styles.title}>
-          <span>{title}</span>
+          <h3>{title}</h3>
+          <span className={styles.count}>{tasks.length}</span>
         </div>
-
-        <span className={styles.count}>{tasks.length}</span>
+        <AddNewTask columnId={columnId} />
       </header>
 
       <li className={styles.tasks}>

@@ -34,6 +34,7 @@ export const createBoard = async (name: string): Promise<Board> => {
       method: 'POST',
       body: { name },
     });
+    console.log('Board created:', response);
     return response;
   } catch (error) {
     console.error('Error creating board:', error);
@@ -77,5 +78,19 @@ export const getCardsByBoardId = async (boardId: string): Promise<any[]> => {
   } catch (error) {
     console.error('Error fetching cards:', error);
     return [];
+  }
+};
+
+export const createTask = async (listId: string, taskData: any): Promise<any> => {
+  try {
+    const response = await apiRequest<any>({
+      endpoint: `/cards?idList=${listId}`,
+      method: 'POST',
+      body: taskData,
+    });
+    return response;
+  } catch (error) {
+    console.error('Error creating task:', error);
+    throw error;
   }
 };

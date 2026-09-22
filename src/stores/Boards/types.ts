@@ -1,6 +1,7 @@
 export type Column = {
   id: string;
   name: string;
+  tasks?: Task[];
 };
 
 export type Board = {
@@ -17,7 +18,7 @@ export type Task = {
   assignee: string;
   description: string;
   idList: Column['id'];
-  date: string;
+  date?: string;
   // REVIEW: категории прописать константой и выводить через typeof
   // TODO: будут ли категории меняться / задаваться при создании доски? если да, то как лучше их обрабатывать и стилизовать?
   category?: 'billing' | 'accounts' | 'forms' | 'other'; // label

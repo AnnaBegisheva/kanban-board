@@ -2,20 +2,27 @@ import BoardPreview from '@components/BoardPreview/BoardPreview';
 import EmptyBoards from '@components/EmptyBoards/EmptyBoards';
 
 import styles from './homeBoards.module.scss';
-import useBoardsStore from '../../stores/Boards/useBoardsStore';
-import { useEffect } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { deleteBoardById, getBoards } from '@stores/boards/api';
 
-const HomeBoards = () => {
-  const boards = useBoardsStore((state) => state.boards);
-  const deleteBoard = useBoardsStore((state) => state.actions.deleteBoard);
+const HomeBoards: React.FC  = () => {
+  const queryClient = useQueryClient();
+  const { data: boards } = useQuery({
+    queryKey: ['boards'],
+    queryFn: () => getBoards(),
+  });
 
-  const loadBoards = useBoardsStore((state) => state.actions.loadBoards);
+  const { mutate: deleteBoard } = useMutation({
+    mutationFn: (boardId: string) => deleteBoardById(boardId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['boards'] });
+    },
+    onError: (error) => {
+      console.error('Error deleting board:', error);
+    },
+  });
 
-  useEffect(() => {
-    loadBoards();
-  }, [loadBoards]);
-
-  if (!boards.length) {
+  if (!boards?.length) {
     return <EmptyBoards />;
   }
 
