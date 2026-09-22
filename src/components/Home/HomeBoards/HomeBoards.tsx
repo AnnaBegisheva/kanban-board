@@ -1,11 +1,11 @@
-import BoardPreview from '@components/BoardPreview/BoardPreview';
-import EmptyBoards from '@components/EmptyBoards/EmptyBoards';
-
-import styles from './homeBoards.module.scss';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteBoardById, getBoards } from '@stores/boards/api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-const HomeBoards: React.FC  = () => {
+import BoardPreview from '../../Boards/BoardPreview/BoardPreview';
+import EmptyBoards from '../EmptyBoards/EmptyBoards';
+import styles from './homeBoards.module.scss';
+
+const HomeBoards: React.FC = () => {
   const queryClient = useQueryClient();
   const { data: boards } = useQuery({
     queryKey: ['boards'],

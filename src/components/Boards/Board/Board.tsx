@@ -1,9 +1,10 @@
-import BoardColumn from '../BoardColumn/BoardColumn';
-import styles from './Board.module.scss';
-import { useMemo } from 'react';
+import { getCardsByBoardId, getListsByBoardId } from '@stores/boards/api';
 import type { Column, Task } from '@stores/boards/types';
 import { useQuery } from '@tanstack/react-query';
-import { getCardsByBoardId, getListsByBoardId } from '@stores/boards/api';
+import { useMemo } from 'react';
+
+import BoardColumn from '../BoardColumn/BoardColumn';
+import styles from './Board.module.scss';
 
 type BoardProps = {
   boardId: string;

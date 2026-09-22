@@ -1,12 +1,12 @@
-import Board from '@components/Board/Board';
-import BoardHeader from '@components/BoardHeader/BoardHeader';
-import BoardToolbar from '@components/BoardToolbar/BoardToolbar';
-import { useParams } from 'react-router';
-
-import styles from './boardPage.module.scss';
+import Board from '@components/Boards/Board/Board';
+import BoardHeader from '@components/Boards/BoardHeader/BoardHeader';
+import BoardToolbar from '@components/Boards/BoardToolbar/BoardToolbar';
 import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
 import { getBoardById } from '@stores/boards/api';
 import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router';
+
+import styles from './boardPage.module.scss';
 
 const BoardPage = () => {
   const { id } = useParams<{ id: string }>();

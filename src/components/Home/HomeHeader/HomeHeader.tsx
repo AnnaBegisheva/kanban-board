@@ -1,4 +1,5 @@
-import AddNewBoard from '@components/AddNewBoard/AddNewBoard';
+import AddNewBoard from '@components/Boards/AddNewBoard/AddNewBoard';
+
 import styles from './homeHeader.module.scss';
 
 const HomeHeader = () => {

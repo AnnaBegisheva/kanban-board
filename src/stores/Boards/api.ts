@@ -1,4 +1,5 @@
 import { apiRequest } from '@utils/requests';
+
 import type { Board } from './types';
 
 export const getBoards = async (): Promise<Board[]> => {

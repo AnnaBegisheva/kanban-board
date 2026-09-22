@@ -1,6 +1,7 @@
 import { create } from 'zustand';
-import type { Board, Task } from './types';
+
 import { getBoardById, getBoards, getCardsByBoardId, getListsByBoardId } from './api';
+import type { Board, Task } from './types';
 
 type BoardsStore = {
   boards: Board[];
