@@ -1,6 +1,6 @@
 import { apiRequest } from '@utils/requests';
 
-import type { Board } from './types';
+import type { Board, Column, Task } from './types';
 
 export const getBoards = async (): Promise<Board[]> => {
   try {
@@ -56,9 +56,9 @@ export const deleteBoardById = async (boardId: string): Promise<boolean> => {
   }
 };
 
-export const getListsByBoardId = async (boardId: string): Promise<any[]> => {
+export const getListsByBoardId = async (boardId: string): Promise<Column[]> => {
   try {
-    const response = await apiRequest<any[]>({
+    const response = await apiRequest<Column[]>({
       endpoint: `/boards/${boardId}/lists`,
       method: 'GET',
     });
@@ -69,9 +69,9 @@ export const getListsByBoardId = async (boardId: string): Promise<any[]> => {
   }
 };
 
-export const getCardsByBoardId = async (boardId: string): Promise<any[]> => {
+export const getCardsByBoardId = async (boardId: string): Promise<Task[]> => {
   try {
-    const response = await apiRequest<any[]>({
+    const response = await apiRequest<Task[]>({
       endpoint: `/boards/${boardId}/cards`,
       method: 'GET',
     });
@@ -82,9 +82,9 @@ export const getCardsByBoardId = async (boardId: string): Promise<any[]> => {
   }
 };
 
-export const createTask = async (listId: string, taskData: any): Promise<any> => {
+export const createTask = async (listId: string, taskData: any): Promise<Task> => {
   try {
-    const response = await apiRequest<any>({
+    const response = await apiRequest<Task>({
       endpoint: `/cards?idList=${listId}`,
       method: 'POST',
       body: taskData,

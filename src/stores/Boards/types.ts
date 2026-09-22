@@ -15,8 +15,8 @@ export type Board = {
 export type Task = {
   id: string;
   name: string;
-  assignee: string;
-  description: string;
+  assignee?: string;
+  description?: string;
   idList: Column['id'];
   date?: string;
   // REVIEW: категории прописать константой и выводить через typeof
