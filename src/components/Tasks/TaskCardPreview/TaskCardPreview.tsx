@@ -1,13 +1,13 @@
 import { BookOutlined } from '@ant-design/icons';
+import type { Task } from '@stores/boards/types';
 import { Avatar } from 'antd';
 
-import type { Task } from '@store/Boards/types';
 import styles from './taskCardPreview.module.scss';
 
 const TaskCardPreview = ({ task }: { task: Task }) => {
   return (
     <article className={styles.card}>
-      <h3 className={styles.title}>{task.title}</h3>
+      <h3 className={styles.title}>{task.name}</h3>
 
       {task.category && (
         <span className={`${styles.category} ${styles[task.category]}`}>{task.category.toUpperCase()}</span>

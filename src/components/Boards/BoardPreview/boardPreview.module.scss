@@ -12,6 +12,15 @@
   box-shadow: 0 5px 16px rgba(31, 39, 72, 0.05);
 }
 
+.boardClosed {
+  background: var(--color-background);
+  color: var(--color-text-secondary);
+
+  .boardTitle {
+    color: var(--color-text-secondary);
+  }
+}
+
 .boardTitle {
   margin: 0;
   font-size: 19px;

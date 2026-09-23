@@ -1,20 +1,17 @@
 import { DeleteOutlined } from '@ant-design/icons';
+import type { Board } from '@stores/boards/types';
 import { Link } from 'react-router';
 
 import styles from './boardPreview.module.scss';
 
 type BoardPreviewProps = {
-  board: {
-    id: number;
-    name: string;
-  };
-  deleteBoard: (id: number) => void;
+  board: Board;
+  deleteBoard: (id: string) => void;
 };
 
 const BoardPreview = ({ board, deleteBoard }: BoardPreviewProps) => {
-
   return (
-    <article key={board.id} className={styles.board}>
+    <article key={board.id} className={`${styles.board} ${board.closed ? styles.closed : ''}`}>
       <Link to={`/board/${board.id}`} className={styles.boardTitle}>
         {board.name}
       </Link>

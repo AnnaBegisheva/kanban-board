@@ -1,0 +1,97 @@
+import { apiRequest } from '@utils/requests';
+
+import type { Board, Column, Task } from './types';
+
+export const getBoards = async (): Promise<Board[]> => {
+  try {
+    const response = await apiRequest<Board[]>({
+      endpoint: `/members/me/boards`,
+      method: 'GET',
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching boards:', error);
+    return [];
+  }
+};
+
+export const getBoardById = async (boardId: string): Promise<Board | null> => {
+  try {
+    const response = await apiRequest<Board>({
+      endpoint: `/boards/${boardId}`,
+      method: 'GET',
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching board:', error);
+    return null;
+  }
+};
+
+export const createBoard = async (name: string): Promise<Board> => {
+  try {
+    const response = await apiRequest<Board>({
+      endpoint: `/boards`,
+      method: 'POST',
+      body: { name },
+    });
+    console.log('Board created:', response);
+    return response;
+  } catch (error) {
+    console.error('Error creating board:', error);
+    throw error;
+  }
+};
+
+export const deleteBoardById = async (boardId: string): Promise<boolean> => {
+  try {
+    const response = await apiRequest<boolean>({
+      endpoint: `/boards/${boardId}`,
+      method: 'DELETE',
+    });
+    return response;
+  } catch (error) {
+    console.error('Error deleting board:', error);
+    return false;
+  }
+};
+
+export const getListsByBoardId = async (boardId: string): Promise<Column[]> => {
+  try {
+    const response = await apiRequest<Column[]>({
+      endpoint: `/boards/${boardId}/lists`,
+      method: 'GET',
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching lists:', error);
+    return [];
+  }
+};
+
+export const getCardsByBoardId = async (boardId: string): Promise<Task[]> => {
+  try {
+    const response = await apiRequest<Task[]>({
+      endpoint: `/boards/${boardId}/cards`,
+      method: 'GET',
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching cards:', error);
+    return [];
+  }
+};
+
+export const createTask = async (listId: string, taskData: any): Promise<Task> => {
+  try {
+    const response = await apiRequest<Task>({
+      endpoint: `/cards?idList=${listId}`,
+      method: 'POST',
+      body: taskData,
+    });
+    return response;
+  } catch (error) {
+    console.error('Error creating task:', error);
+    throw error;
+  }
+};
