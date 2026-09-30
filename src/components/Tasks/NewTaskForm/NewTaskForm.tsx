@@ -1,7 +1,5 @@
-import type { TaskValues } from '../../../services/types';
+import type { TaskValues } from '@services/types';
 import { Button, Form, Input, Select } from 'antd';
-
-import type { TaskValues } from '../../../services/types';
 
 type NewTaskFormProps = {
   onSuccess: (values: TaskValues) => void;

@@ -1,6 +1,5 @@
-import { apiRequest } from '@utils/requests';
-
 import type { Board, Column, Task, TaskAction } from '@services/types';
+import { apiRequest } from '@utils/requests';
 
 export const getBoards = async (): Promise<Board[]> => {
   try {
@@ -95,7 +94,7 @@ export const getTaskById = async (taskId: string): Promise<Task | null> => {
   }
 };
 
-export const createTask = async (listId: string, taskData: any): Promise<Task> => {
+export const createTask = async (listId: string, taskData: Partial<Task>): Promise<Task> => {
   try {
     const response = await apiRequest<Task>({
       endpoint: `/cards?idList=${listId}`,

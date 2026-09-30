@@ -1,13 +1,12 @@
-import AddNewTask from '@components/Tasks/AddNewTask/AddNewTask';
-import TaskCard from '@components/Tasks/TaskCard/TaskCard';
-import type { Task } from '../../../services/types';
-
-import type { Task } from '../../../services/types';
-import styles from './BoardColumn.module.scss';
-import { useModal } from '@hooks/useModal';
 import ModalWindow from '@components/shared/ModalWindow/ModalWindow';
-import { useState } from 'react';
+import TaskCard from '@components/TaskCard/TaskCard/TaskCard';
+import AddNewTask from '@components/Tasks/AddNewTask/AddNewTask';
 import TaskCardPreview from '@components/Tasks/TaskCardPreview/TaskCardPreview';
+import { useModal } from '@hooks/useModal';
+import type { Task } from '@services/types';
+import { useState } from 'react';
+
+import styles from './BoardColumn.module.scss';
 
 type BoardColumnProps = {
   tasks: Task[];
