@@ -1,7 +1,7 @@
 import NewBoardForm from '@components/Boards/NewBoardForm/NewBoardForm';
 import ModalWindow from '@components/shared/ModalWindow/ModalWindow';
 import { useModal } from '@hooks/useModal';
-import { createBoard } from '@stores/boards/api';
+import { createBoard } from '@services/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import styles from './addNewBoard.module.scss';

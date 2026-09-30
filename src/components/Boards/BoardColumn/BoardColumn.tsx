@@ -1,7 +1,7 @@
 import AddNewTask from '@components/Tasks/AddNewTask/AddNewTask';
 import TaskCard from '@components/Tasks/TaskCardPreview/TaskCardPreview';
-import type { Task } from '@stores/boards/types';
 
+import type { Task } from '../../../services/types';
 import styles from './BoardColumn.module.scss';
 
 type BoardColumnProps = {

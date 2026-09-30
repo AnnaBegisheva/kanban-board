@@ -82,7 +82,7 @@ export const getCardsByBoardId = async (boardId: string): Promise<Task[]> => {
   }
 };
 
-export const createTask = async (listId: string, taskData: any): Promise<Task> => {
+export const createTask = async (listId: string, taskData: Partial<Task>): Promise<Task> => {
   try {
     const response = await apiRequest<Task>({
       endpoint: `/cards?idList=${listId}`,
