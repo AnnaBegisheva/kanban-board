@@ -1,6 +1,6 @@
 import { apiRequest } from '@utils/requests';
 
-import type { Board, Column, Task, TaskAction } from './types';
+import type { Board, Column, Task, TaskAction } from '@services/types';
 
 export const getBoards = async (): Promise<Board[]> => {
   try {

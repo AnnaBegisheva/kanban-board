@@ -2,6 +2,7 @@ import AddNewTask from '@components/Tasks/AddNewTask/AddNewTask';
 import TaskCard from '@components/Tasks/TaskCard/TaskCard';
 import type { Task } from '../../../services/types';
 
+import type { Task } from '../../../services/types';
 import styles from './BoardColumn.module.scss';
 import { useModal } from '@hooks/useModal';
 import ModalWindow from '@components/shared/ModalWindow/ModalWindow';

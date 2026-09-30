@@ -2,6 +2,7 @@ import { BookOutlined } from '@ant-design/icons';
 import type { Task } from '../../../services/types';
 import { Avatar } from 'antd';
 
+import type { Task } from '../../../services/types';
 import styles from './taskCardPreview.module.scss';
 
 type TaskCardPreviewProps = {

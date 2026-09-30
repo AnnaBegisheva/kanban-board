@@ -1,4 +1,4 @@
-import { deleteBoardById, getBoards } from '../../../services/api';
+import { deleteBoardById, getBoards } from '@services/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import BoardPreview from '../../Boards/BoardPreview/BoardPreview';

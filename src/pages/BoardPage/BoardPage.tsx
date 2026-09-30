@@ -2,7 +2,7 @@ import Board from '@components/Boards/Board/Board';
 import BoardHeader from '@components/Boards/BoardHeader/BoardHeader';
 import BoardToolbar from '@components/Boards/BoardToolbar/BoardToolbar';
 import NotFoundPage from '@pages/NotFoundPage/NotFoundPage';
-import { getBoardById } from '../../services/api';
+import { getBoardById } from '@services/api';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router';
 
