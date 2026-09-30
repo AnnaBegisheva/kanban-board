@@ -16,12 +16,36 @@ export type Task = {
   id: string;
   name: string;
   assignee?: string;
-  description?: string;
+  desc?: string;
   idList: Column['id'];
   date?: string;
   // REVIEW: категории прописать константой и выводить через typeof
   // TODO: будут ли категории меняться / задаваться при создании доски? если да, то как лучше их обрабатывать и стилизовать?
   category?: 'billing' | 'accounts' | 'forms' | 'other'; // label
+  dateLastActivity?: string;
+  labels?: string[]; // = categories
+  activities?: string; // = description
 };
 
 export type TaskValues = Omit<Task, 'id' | 'idList' | 'date'>;
+
+export type TaskAction = {
+  id: string;
+  memberCreator: {
+    id: string;
+    fullName: string;
+    avatarUrl: string;
+  };
+  date: string;
+  type: string;
+  data: {
+    listBefore: {
+      id: string;
+      name: string;
+    };
+    listAfter: {
+      id: string;
+      name: string;
+    };
+  };
+};

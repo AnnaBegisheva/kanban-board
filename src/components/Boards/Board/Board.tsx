@@ -1,5 +1,5 @@
-import { getCardsByBoardId, getListsByBoardId } from '@stores/boards/api';
-import type { Column, Task } from '@stores/boards/types';
+import { getCardsByBoardId, getListsByBoardId } from '../../../services/api';
+import type { Column, Task } from '../../../services/types';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 

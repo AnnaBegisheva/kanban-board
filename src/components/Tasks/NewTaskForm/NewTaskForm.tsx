@@ -1,4 +1,4 @@
-import type { TaskValues } from '@stores/boards/types';
+import type { TaskValues } from '../../../services/types';
 import { Button, Form, Input, Select } from 'antd';
 
 type NewTaskFormProps = {

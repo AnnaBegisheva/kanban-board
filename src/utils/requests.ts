@@ -2,7 +2,7 @@ const API_BASE_URL = 'https://api.trello.com/1';
 const API_KEY = import.meta.env.VITE_API_KEY;
 const TOKEN = import.meta.env.VITE_TOKEN;
 
-type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 type ApiRequestOptions = {
   endpoint: string;
   method?: Method;

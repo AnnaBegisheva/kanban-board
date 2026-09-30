@@ -1,11 +1,11 @@
 import ModalWindow from '@components/shared/ModalWindow/ModalWindow';
 import NewTaskForm from '@components/Tasks/NewTaskForm/NewTaskForm';
 import { useModal } from '@hooks/useModal';
-import { createTask } from '@stores/boards/api';
+import { createTask } from '../../../services/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from 'antd';
 
-import type { Task, TaskValues } from '../../../stores/boards/types';
+import type { Task, TaskValues } from '../../../services/types';
 import styles from './addNewTask.module.scss';
 
 type AddNewTaskProps = {
