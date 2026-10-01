@@ -1,10 +1,11 @@
 .board {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  display: flex;
   gap: 14px;
-
   height: calc(100vh - 150px);
   min-height: 650px;
-
   overflow-x: auto;
+}
+
+.board > * {
+  flex: 0 0 240px;
 }

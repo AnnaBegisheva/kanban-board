@@ -1,6 +1,6 @@
 import { Button, Form, Input, Select } from 'antd';
 
-import type { TaskValues } from '@store/Boards/types';
+import type { TaskValues } from '../../../services/types';
 
 type NewTaskFormProps = {
   onSuccess: (values: TaskValues) => void;
@@ -16,7 +16,7 @@ const NewTaskForm = ({ onSuccess }: NewTaskFormProps) => {
 
   return (
     <Form form={form} onFinish={handleFinish} layout="vertical">
-      <Form.Item name="title" label="Task Title" rules={[{ required: true, message: 'Please enter task title' }]}>
+      <Form.Item name="name" label="Task Title" rules={[{ required: true, message: 'Please enter task title' }]}>
         <Input placeholder="Enter task title" />
       </Form.Item>
       <Form.Item

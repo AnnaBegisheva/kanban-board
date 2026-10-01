@@ -1,25 +1,30 @@
 export type Column = {
-  id: 'todo' | 'progress' | 'review' | 'done';
-  title: string;
+  id: string;
+  name: string;
+  tasks?: Task[];
 };
 
 export type Board = {
-  id: number;
+  id: string;
   name: string;
+  closed?: boolean;
   columns: Column[];
   tasks: Task[];
 };
 
 export type Task = {
   id: string;
-  title: string;
-  assignee: string;
-  description: string;
-  status: Column['id'];
-  date: string;
+  name: string;
+  assignee?: string;
+  desc?: string;
+  idList: Column['id'];
+  date?: string;
   // REVIEW: категории прописать константой и выводить через typeof
   // TODO: будут ли категории меняться / задаваться при создании доски? если да, то как лучше их обрабатывать и стилизовать?
-  category?: 'billing' | 'accounts' | 'forms' | 'other';
+  category?: 'billing' | 'accounts' | 'forms' | 'other'; // label
+  dateLastActivity?: string;
+  labels?: string[]; // = categories
+  activities?: string; // = description
 };
 
-export type TaskValues = Omit<Task, 'id' | 'status' | 'date'>;
+export type TaskValues = Omit<Task, 'id' | 'idList' | 'date'>;

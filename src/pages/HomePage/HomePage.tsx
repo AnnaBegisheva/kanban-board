@@ -1,5 +1,5 @@
-import HomeBoards from '@components/HomeBoards/HomeBoards';
-import HomeHeader from '@components/HomeHeader/HomeHeader';
+import HomeBoards from '@components/Home/HomeBoards/HomeBoards';
+import HomeHeader from '@components/Home/HomeHeader/HomeHeader';
 
 import styles from './HomePage.module.scss';
 
