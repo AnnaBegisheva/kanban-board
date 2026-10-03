@@ -2,29 +2,12 @@ import { getCardsByBoardId, getListsByBoardId } from '@services/api';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
-import type { Column, Task } from '../../../services/types';
 import BoardColumn from '../BoardColumn/BoardColumn';
 import styles from './Board.module.scss';
+import { buildColumns } from './buildColumns';
 
 type BoardProps = {
   boardId: string;
-};
-
-const buildColumns = (columns: Column[], tasks: Task[]): Column[] => {
-  const columnsMap = new Map<string, Column>();
-
-  columns.forEach((column) => {
-    columnsMap.set(column.id, { ...column, tasks: [] });
-  });
-
-  tasks.forEach((task) => {
-    const column = columnsMap.get(task.idList);
-    if (column) {
-      column.tasks?.push(task);
-    }
-  });
-
-  return [...columnsMap.values()];
 };
 
 const Board: React.FC<BoardProps> = ({ boardId }) => {

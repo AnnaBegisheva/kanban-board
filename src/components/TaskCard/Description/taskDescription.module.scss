@@ -1,0 +1,21 @@
+.description {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  min-height: 24px;
+}
+
+.actions {
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.editIcon {
+  margin-left: 5px;
+  cursor: pointer;
+
+  :hover {
+    color: var(--color-primary);
+  }
+}
