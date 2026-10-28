@@ -2,6 +2,7 @@ import { updateTaskById } from '@services/api';
 import type { Task } from '@services/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { memo, useCallback } from 'react';
+import { useParams } from 'react-router';
 
 import TaskCardColumn from '../Column/TaskCardColumn';
 import TaskCardDelete from '../Delete/TaskCardDelete';
@@ -9,7 +10,7 @@ import TaskCardDescription from '../Description/TaskCardDescription';
 import TaskCardHistory from '../History/TaskCardHistory';
 import TaskCardMetaData from '../MetaData/TaskCardMetaData';
 import TaskCardTitle from '../Title/TaskCardTitle';
-import styles from './TaskCard.module.scss';
+import styles from './taskCard.module.scss';
 
 type TaskCardProps = {
   task: Task;
@@ -17,18 +18,43 @@ type TaskCardProps = {
 
 const TaskCard: React.FC<TaskCardProps> = memo(({ task }) => {
   const queryClient = useQueryClient();
+  const { id: boardId } = useParams<{ id: string }>();
 
   const { mutate: updateTask } = useMutation({
     mutationFn: (newTask: Task) => updateTaskById(task.id, newTask),
 
+    onMutate: async (newTask) => {
+      const queryKey = ['tasks', boardId];
+
+      await queryClient.cancelQueries({ queryKey });
+
+      const previousTasks = queryClient.getQueryData<Task[]>(queryKey);
+
+      queryClient.setQueryData<Task[]>(queryKey, (oldTasks) =>
+        oldTasks?.map((oldTask) => (oldTask.id === newTask.id ? { ...oldTask, ...newTask } : oldTask)),
+      );
+
+      return { previousTasks };
+    },
+
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['tasks'],
+      void queryClient.invalidateQueries({
+        queryKey: ['actions', task.id],
       });
     },
 
-    onError: (error) => {
+    onError: (error, _newTask, context) => {
+      if (context?.previousTasks) {
+        queryClient.setQueryData(['tasks', boardId], context.previousTasks);
+      }
+
       console.error('Error updating task:', error);
+    },
+
+    onSettled: () => {
+      void queryClient.invalidateQueries({
+        queryKey: ['tasks', boardId],
+      });
     },
   });
 

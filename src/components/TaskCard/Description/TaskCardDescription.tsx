@@ -1,6 +1,6 @@
 import { EditOutlined } from '@ant-design/icons';
 import { Button, Input, Typography } from 'antd';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 
 import styles from './taskDescription.module.scss';
 
@@ -12,12 +12,6 @@ type TaskDescriptionProps = {
 const TaskCardDescription: React.FC<TaskDescriptionProps> = memo(({ desc, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState(desc);
-
-  useEffect(() => {
-    if (!isEditing) {
-      setDescription(desc);
-    }
-  }, [desc, isEditing]);
 
   const handleEdit = () => {
     setDescription(desc);
