@@ -4,6 +4,7 @@ import { useModal } from '@hooks/useModal';
 import { createTask } from '@services/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from 'antd';
+import { useParams } from 'react-router';
 
 import type { Task, TaskValues } from '../../../services/types';
 import styles from './addNewTask.module.scss';
@@ -15,11 +16,12 @@ type AddNewTaskProps = {
 const AddNewTask: React.FC<AddNewTaskProps> = ({ columnId }) => {
   const [isOpen, open, close] = useModal();
   const queryClient = useQueryClient();
+  const { id: boardId } = useParams<{ id: string }>();
 
   const { mutate: addTask } = useMutation({
     mutationFn: ({ columnId, newTask }: { columnId: string; newTask: Task }) => createTask(columnId, newTask),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['tasks', boardId] });
     },
     onError: (error) => {
       console.error('Error creating task:', error);

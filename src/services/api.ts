@@ -1,6 +1,5 @@
+import type { Board, Column, Task, TaskAction } from '@services/types';
 import { apiRequest } from '@utils/requests';
-
-import type { Board, Column, Task } from './types';
 
 export const getBoards = async (): Promise<Board[]> => {
   try {
@@ -82,6 +81,19 @@ export const getCardsByBoardId = async (boardId: string): Promise<Task[]> => {
   }
 };
 
+export const getTaskById = async (taskId: string): Promise<Task | null> => {
+  try {
+    const response = await apiRequest<Task>({
+      endpoint: `/cards/${taskId}`,
+      method: 'GET',
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching task:', error);
+    return null;
+  }
+};
+
 export const createTask = async (listId: string, taskData: Partial<Task>): Promise<Task> => {
   try {
     const response = await apiRequest<Task>({
@@ -93,5 +105,46 @@ export const createTask = async (listId: string, taskData: Partial<Task>): Promi
   } catch (error) {
     console.error('Error creating task:', error);
     throw error;
+  }
+};
+
+export const deleteTaskById = async (taskId: string): Promise<boolean> => {
+  try {
+    console.log(taskId, 'id');
+    const response = await apiRequest<boolean>({
+      endpoint: `/cards/${taskId}`,
+      method: 'DELETE',
+    });
+    return response;
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    return false;
+  }
+};
+
+export const updateTaskById = async (taskId: string, updatedData: Partial<Task>): Promise<Task> => {
+  try {
+    const response = await apiRequest<Task>({
+      endpoint: `/cards/${taskId}`,
+      method: 'PUT',
+      body: updatedData,
+    });
+    return response;
+  } catch (error) {
+    console.error('Error updating task:', error);
+    throw error;
+  }
+};
+
+export const getActionsByTaskId = async (taskId: string): Promise<TaskAction[]> => {
+  try {
+    const response = await apiRequest<TaskAction[]>({
+      endpoint: `/cards/${taskId}/actions`,
+      method: 'GET',
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching task:', error);
+    return [];
   }
 };
