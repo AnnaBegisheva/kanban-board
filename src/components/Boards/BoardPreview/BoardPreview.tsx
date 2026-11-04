@@ -1,7 +1,8 @@
 import { DeleteOutlined } from '@ant-design/icons';
+import type { Board } from '@services/types';
+import { Popconfirm } from 'antd';
 import { Link } from 'react-router';
 
-import type { Board } from '../../../services/types';
 import styles from './boardPreview.module.scss';
 
 type BoardPreviewProps = {
@@ -15,10 +16,18 @@ const BoardPreview = ({ board, deleteBoard }: BoardPreviewProps) => {
       <Link to={`/board/${board.id}`} className={styles.boardTitle}>
         {board.name}
       </Link>
-      <button type="button" onClick={() => deleteBoard(board.id)} className={styles.deleteButton}>
-        <DeleteOutlined className={styles.deleteIcon} />
-        <span>Delete board</span>
-      </button>
+      <Popconfirm
+        title="Удалить доску?"
+        description="Это действие нельзя отменить."
+        onConfirm={() => deleteBoard(board.id)}
+        okText="Удалить"
+        cancelText="Отмена"
+      >
+        <button type="button" className={styles.deleteButton}>
+          <DeleteOutlined className={styles.deleteIcon} />
+          <span>Delete board</span>
+        </button>
+      </Popconfirm>
     </article>
   );
 };

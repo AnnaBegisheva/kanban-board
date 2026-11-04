@@ -1,6 +1,5 @@
+import type { TaskValues } from '@services/types';
 import { Button, Form, Input, Select } from 'antd';
-
-import type { TaskValues } from '../../../services/types';
 
 type NewTaskFormProps = {
   onSuccess: (values: TaskValues) => void;
@@ -10,7 +9,6 @@ const NewTaskForm = ({ onSuccess }: NewTaskFormProps) => {
   const [form] = Form.useForm<TaskValues>();
 
   const handleFinish = (values: TaskValues) => {
-    // Handle form submission logic here
     onSuccess(values);
   };
 
@@ -20,7 +18,7 @@ const NewTaskForm = ({ onSuccess }: NewTaskFormProps) => {
         <Input placeholder="Enter task title" />
       </Form.Item>
       <Form.Item
-        name="description"
+        name="desc"
         label="Task Description"
         rules={[{ required: true, message: 'Please enter task description' }]}
       >
