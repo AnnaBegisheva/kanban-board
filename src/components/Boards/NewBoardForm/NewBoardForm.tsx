@@ -8,8 +8,6 @@ const NewBoardForm = ({ onSuccess }: NewBoardFormProps) => {
   const [form] = Form.useForm();
 
   const handleFinish = (values: { title: string }) => {
-    // Handle form submission logic here
-    console.log('Form submitted with values:', values);
     onSuccess(values.title);
   };
 

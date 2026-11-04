@@ -110,7 +110,6 @@ export const createTask = async (listId: string, taskData: Partial<Task>): Promi
 
 export const deleteTaskById = async (taskId: string): Promise<boolean> => {
   try {
-    console.log(taskId, 'id');
     const response = await apiRequest<boolean>({
       endpoint: `/cards/${taskId}`,
       method: 'DELETE',

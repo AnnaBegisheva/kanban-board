@@ -1,8 +1,6 @@
-import { updateTaskById } from '@services/api';
+import useUpdateTask from '@hooks/useUpdateTask';
 import type { Task } from '@services/types';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { memo, useCallback } from 'react';
-import { useParams } from 'react-router';
 
 import TaskCardColumn from '../Column/TaskCardColumn';
 import TaskCardDelete from '../Delete/TaskCardDelete';
@@ -14,49 +12,11 @@ import styles from './taskCard.module.scss';
 
 type TaskCardProps = {
   task: Task;
+  boardId: string;
 };
 
-const TaskCard: React.FC<TaskCardProps> = memo(({ task }) => {
-  const queryClient = useQueryClient();
-  const { id: boardId } = useParams<{ id: string }>();
-
-  const { mutate: updateTask } = useMutation({
-    mutationFn: (newTask: Task) => updateTaskById(task.id, newTask),
-
-    onMutate: async (newTask) => {
-      const queryKey = ['tasks', boardId];
-
-      await queryClient.cancelQueries({ queryKey });
-
-      const previousTasks = queryClient.getQueryData<Task[]>(queryKey);
-
-      queryClient.setQueryData<Task[]>(queryKey, (oldTasks) =>
-        oldTasks?.map((oldTask) => (oldTask.id === newTask.id ? { ...oldTask, ...newTask } : oldTask)),
-      );
-
-      return { previousTasks };
-    },
-
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: ['actions', task.id],
-      });
-    },
-
-    onError: (error, _newTask, context) => {
-      if (context?.previousTasks) {
-        queryClient.setQueryData(['tasks', boardId], context.previousTasks);
-      }
-
-      console.error('Error updating task:', error);
-    },
-
-    onSettled: () => {
-      void queryClient.invalidateQueries({
-        queryKey: ['tasks', boardId],
-      });
-    },
-  });
+const TaskCard: React.FC<TaskCardProps> = memo(({ task, boardId }) => {
+  const { mutate: updateTask } = useUpdateTask(boardId);
 
   const handleUpdateTitle = useCallback(
     (name: string) => {
