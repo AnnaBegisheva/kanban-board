@@ -24,13 +24,15 @@ const BoardColumn: React.FC<BoardColumnProps> = ({ tasks, title, columnId, onCar
         <AddNewTask columnId={columnId} />
       </header>
 
-      <Droppable key={columnId} id={columnId}>
+      <>
         <li className={styles.tasks}>
           {tasks.map((task) => (
-            <TaskCardPreview key={task.id} task={task} onCardClick={onCardClick} />
+            <Droppable key={task.id} id={task.id}>
+              <TaskCardPreview key={task.id} task={task} onCardClick={onCardClick} />
+            </Droppable>
           ))}
         </li>
-      </Droppable>
+      </>
     </ul>
   );
 };

@@ -25,6 +25,7 @@ export type Task = {
   dateLastActivity?: string;
   labels?: string[]; // = categories
   activities?: string; // = description
+  pos: number; // position of the task in the list
 };
 
 export type TaskValues = Omit<Task, 'id' | 'idList' | 'date'>;

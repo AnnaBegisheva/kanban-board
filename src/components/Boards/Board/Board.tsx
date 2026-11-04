@@ -46,21 +46,33 @@ const Board: React.FC<BoardProps> = ({ boardId }) => {
 
     const { source, target } = event.operation;
     const taskId = source?.id;
-    const columnId = target?.id;
+    const targetId = target?.id;
 
-    if (typeof taskId !== 'string' || typeof columnId !== 'string') {
+    if (typeof taskId !== 'string' || typeof targetId !== 'string') {
       return;
     }
 
     const draggedTask = tasks.find((task) => task.id === taskId);
+    const targetTask = tasks.find((task) => task.id === targetId);
 
-    if (!draggedTask || draggedTask.idList === columnId) {
+    if (!draggedTask || !targetTask || draggedTask.id === targetTask.id) {
       return;
     }
 
+    const columnTasks = tasks
+      .filter((task) => task.idList === targetTask.idList && task.id !== draggedTask.id)
+      .sort((a, b) => a.pos - b.pos);
+
+    const targetIndex = columnTasks.findIndex((task) => task.id === targetId);
+
+    const previousTask = columnTasks[targetIndex - 1];
+
+    const nextPos = previousTask ? (previousTask.pos + targetTask.pos) / 2 : targetTask.pos - 1;
+
     updateTask({
       ...draggedTask,
-      idList: columnId,
+      idList: targetTask.idList,
+      pos: nextPos,
     });
   };
 

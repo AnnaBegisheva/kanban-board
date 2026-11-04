@@ -8,8 +8,7 @@ const useUpdateTask = (boardId: string) => {
   const tasksQueryKey = ['tasks', boardId];
 
   return useMutation({
-    mutationFn: (newTask: Task) =>
-      updateTaskById(newTask.id, newTask),
+    mutationFn: (newTask: Task) => updateTaskById(newTask.id, newTask),
 
     onMutate: async (newTask) => {
       await queryClient.cancelQueries({
@@ -19,11 +18,7 @@ const useUpdateTask = (boardId: string) => {
       const previousTasks = queryClient.getQueryData<Task[]>(tasksQueryKey);
 
       queryClient.setQueryData<Task[]>(tasksQueryKey, (oldTasks) =>
-        oldTasks?.map((oldTask) =>
-          oldTask.id === newTask.id
-            ? { ...oldTask, ...newTask }
-            : oldTask,
-        ),
+        oldTasks?.map((oldTask) => (oldTask.id === newTask.id ? { ...oldTask, ...newTask } : oldTask)),
       );
 
       return { previousTasks };
@@ -50,5 +45,4 @@ const useUpdateTask = (boardId: string) => {
     },
   });
 };
-
 export default useUpdateTask;

@@ -14,5 +14,8 @@ export const buildColumns = (columns: Column[], tasks: Task[]): Column[] => {
     }
   });
 
-  return [...columnsMap.values()];
+  return [...columnsMap.values()].map((column) => ({
+    ...column,
+    tasks: column.tasks?.toSorted((a, b) => a.pos - b.pos),
+  }));
 };
