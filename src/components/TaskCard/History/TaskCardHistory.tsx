@@ -2,7 +2,7 @@ import { getActionsByTaskId } from '@services/api';
 import { useQuery } from '@tanstack/react-query';
 import { formatDate } from '@utils/formatDate';
 import { Collapse, Timeline, Typography } from 'antd';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 
 type TaskHistoryProps = {
   taskId: string;
@@ -14,25 +14,22 @@ const TaskCardHistory: React.FC<TaskHistoryProps> = memo(({ taskId }) => {
     queryFn: () => getActionsByTaskId(taskId),
   });
 
-  const timelineItems = useMemo(
-    () =>
-      actions?.map((activity) => ({
-        children: (
+  const timelineItems =
+    actions?.map((activity) => ({
+      children: (
+        <div>
+          <Typography.Text strong>{activity.memberCreator.fullName}</Typography.Text>
+
           <div>
-            <Typography.Text strong>{activity.memberCreator.fullName}</Typography.Text>
-
-            <div>
-              Статус изменен: {activity.data.listBefore.name}
-              {' → '}
-              {activity.data.listAfter.name}
-            </div>
-
-            <Typography.Text type="secondary">{formatDate(activity.date)}</Typography.Text>
+            Статус изменен: {activity.data.listBefore.name}
+            {' → '}
+            {activity.data.listAfter.name}
           </div>
-        ),
-      })) ?? [],
-    [actions],
-  );
+
+          <Typography.Text type="secondary">{formatDate(activity.date)}</Typography.Text>
+        </div>
+      ),
+    })) ?? [];
 
   return (
     <section>

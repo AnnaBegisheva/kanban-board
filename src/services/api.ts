@@ -51,7 +51,7 @@ export const deleteBoardById = async (boardId: string): Promise<boolean> => {
     return response;
   } catch (error) {
     console.error('Error deleting board:', error);
-    return false;
+    throw error;
   }
 };
 
@@ -117,7 +117,7 @@ export const deleteTaskById = async (taskId: string): Promise<boolean> => {
     return response;
   } catch (error) {
     console.error('Error deleting task:', error);
-    return false;
+    throw error;
   }
 };
 
