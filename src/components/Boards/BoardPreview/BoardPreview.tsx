@@ -1,7 +1,7 @@
 import { DeleteOutlined } from '@ant-design/icons';
+import type { Board } from '@services/types';
 import { Link } from 'react-router';
 
-import type { Board } from '../../../services/types';
 import styles from './boardPreview.module.scss';
 
 type BoardPreviewProps = {

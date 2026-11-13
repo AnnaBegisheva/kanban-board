@@ -1,30 +1,15 @@
+import ModalWindow from '@components/shared/ModalWindow/ModalWindow';
+import TaskCard from '@components/TaskCard/TaskCard/TaskCard';
 import { getCardsByBoardId, getListsByBoardId } from '@services/api';
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
-import type { Column, Task } from '../../../services/types';
 import BoardColumn from '../BoardColumn/BoardColumn';
 import styles from './Board.module.scss';
+import { buildColumns } from './buildColumns';
 
 type BoardProps = {
   boardId: string;
-};
-
-const buildColumns = (columns: Column[], tasks: Task[]): Column[] => {
-  const columnsMap = new Map<string, Column>();
-
-  columns.forEach((column) => {
-    columnsMap.set(column.id, { ...column, tasks: [] });
-  });
-
-  tasks.forEach((task) => {
-    const column = columnsMap.get(task.idList);
-    if (column) {
-      column.tasks?.push(task);
-    }
-  });
-
-  return [...columnsMap.values()];
 };
 
 const Board: React.FC<BoardProps> = ({ boardId }) => {
@@ -43,12 +28,31 @@ const Board: React.FC<BoardProps> = ({ boardId }) => {
     return buildColumns(columns, tasks);
   }, [columns, tasks]);
 
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
+
+  const selectedTask = tasks?.find((task) => task.id === selectedTaskId) ?? null;
+
+  const handleCardClick = (taskId: string) => {
+    setSelectedTaskId(taskId);
+  };
+
   return (
-    <section className={styles.board}>
-      {tasksByColumn.map((column) => (
-        <BoardColumn key={column.id} columnId={column.id} tasks={column.tasks ?? []} title={column.name} />
-      ))}
-    </section>
+    <>
+      <section className={styles.board}>
+        {tasksByColumn.map((column) => (
+          <BoardColumn
+            key={column.id}
+            columnId={column.id}
+            tasks={column.tasks ?? []}
+            title={column.name}
+            onCardClick={handleCardClick}
+          />
+        ))}
+      </section>
+      <ModalWindow open={!!selectedTaskId} onClose={() => setSelectedTaskId(null)}>
+        {selectedTask ? <TaskCard task={selectedTask} /> : null}
+      </ModalWindow>
+    </>
   );
 };
 

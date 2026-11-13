@@ -1,12 +1,17 @@
 import { BookOutlined } from '@ant-design/icons';
+import type { Task } from '@services/types';
 import { Avatar } from 'antd';
 
-import type { Task } from '../../../services/types';
 import styles from './taskCardPreview.module.scss';
 
-const TaskCardPreview = ({ task }: { task: Task }) => {
+type TaskCardPreviewProps = {
+  task: Task;
+  onCardClick: (taskId: string) => void;
+};
+
+const TaskCardPreview: React.FC<TaskCardPreviewProps> = ({ task, onCardClick }) => {
   return (
-    <article className={styles.card}>
+    <article className={styles.card} onClick={() => onCardClick(task.id)}>
       <h3 className={styles.title}>{task.name}</h3>
 
       {task.category && (

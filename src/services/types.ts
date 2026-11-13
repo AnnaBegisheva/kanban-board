@@ -28,3 +28,24 @@ export type Task = {
 };
 
 export type TaskValues = Omit<Task, 'id' | 'idList' | 'date'>;
+
+export type TaskAction = {
+  id: string;
+  memberCreator: {
+    id: string;
+    fullName: string;
+    avatarUrl: string;
+  };
+  date: string;
+  type: string;
+  data: {
+    listBefore: {
+      id: string;
+      name: string;
+    };
+    listAfter: {
+      id: string;
+      name: string;
+    };
+  };
+};
